@@ -33,7 +33,7 @@ There're a few options to install the binary:
 
 ### Release binaries
 
-You can download the release binary for your system from the [releases page](https://github.com/hibiken/asynqmon/releases).
+You can download the release binary for your system from the [releases page](https://github.com/guilinonline/asynqmon/releases).
 
 ### Docker image
 
@@ -189,7 +189,7 @@ Next, go to [localhost:8080](http://localhost:8080) and see Asynqmon dashboard:
 
 ## Import as a Library
 
-[![GoDoc](https://godoc.org/github.com/hibiken/asynqmon?status.svg)](https://godoc.org/github.com/hibiken/asynqmon)
+[![GoDoc](https://godoc.org/github.com/guilinonline/asynqmon?status.svg)](https://godoc.org/github.com/guilinonline/asynqmon)
 
 Asynqmon is also a library which can be imported into an existing web application.
 
@@ -203,7 +203,7 @@ import (
 	"net/http"
 
 	"github.com/hibiken/asynq"
-	"github.com/hibiken/asynqmon"
+	"github.com/guilinonline/asynqmon"
 )
 
 func main() {
@@ -231,7 +231,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/hibiken/asynq"
-	"github.com/hibiken/asynqmon"
+	"github.com/guilinonline/asynqmon"
 )
 
 func main() {
@@ -262,7 +262,7 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/hibiken/asynq"
-	"github.com/hibiken/asynqmon"
+	"github.com/guilinonline/asynqmon"
 )
 
 func main() {
@@ -284,4 +284,4 @@ func main() {
 
 ## License
 
-Copyright (c) 2019-present [Ken Hibino](https://github.com/hibiken) and [Contributors](https://github.com/hibiken/asynqmon/graphs/contributors). `Asynqmon` is free and open-source software licensed under the [MIT License](https://github.com/hibiken/asynq/blob/master/LICENSE). Official logo was created by [Vic Shóstak](https://github.com/koddr) and distributed under [Creative Commons](https://creativecommons.org/publicdomain/zero/1.0/) license (CC0 1.0 Universal).
+Copyright (c) 2019-present [Ken Hibino](https://github.com/hibiken) and [Contributors](https://github.com/guilinonline/asynqmon/graphs/contributors). `Asynqmon` is free and open-source software licensed under the [MIT License](https://github.com/hibiken/asynq/blob/master/LICENSE). Official logo was created by [Vic Shóstak](https://github.com/koddr) and distributed under [Creative Commons](https://creativecommons.org/publicdomain/zero/1.0/) license (CC0 1.0 Universal).
