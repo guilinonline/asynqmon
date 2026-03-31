@@ -41,17 +41,34 @@ type Options struct {
 	PrometheusAddress string
 
 	// Set ReadOnly to true to restrict user to view-only mode.
-	ReadOnly bool
+	ReadOnly    bool
+	StripPrefix string
 }
 
 // HTTPHandler is a http.Handler for asynqmon application.
 type HTTPHandler struct {
-	router   *mux.Router
-	closers  []func() error
-	rootPath string // the value should not have the trailing slash
+	router      *mux.Router
+	closers     []func() error
+	rootPath    string // the value should not have the trailing slash
+	stripPrefix string
 }
 
 func (h *HTTPHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if h.stripPrefix != "" && strings.HasPrefix(r.URL.Path, h.stripPrefix) {
+		// 保存原始路径
+		originalPath := r.URL.Path
+		// 剥离前缀
+		r.URL.Path = strings.TrimPrefix(r.URL.Path, h.stripPrefix)
+		if r.URL.Path == "" {
+			r.URL.Path = "/"
+		}
+		// 调用实际 handler
+		h.router.ServeHTTP(w, r)
+		// 恢复原始路径（防止影响其他中间件）
+		r.URL.Path = originalPath
+		return
+	}
+
 	h.router.ServeHTTP(w, r)
 }
 
@@ -74,9 +91,10 @@ func New(opts Options) *HTTPHandler {
 	opts.RootPath = strings.TrimSuffix(opts.RootPath, "/")
 
 	return &HTTPHandler{
-		router:   muxRouter(opts, rc, i),
-		closers:  []func() error{rc.Close, i.Close},
-		rootPath: opts.RootPath,
+		router:      muxRouter(opts, rc, i),
+		closers:     []func() error{rc.Close, i.Close},
+		rootPath:    opts.RootPath,
+		stripPrefix: opts.StripPrefix,
 	}
 }
 
